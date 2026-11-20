@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poderes Para Aprendedores - Web Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.25s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- CABECERA INSTITUCIONAL Y DE NAVEGACIÓN -->
+    <header class="bg-slate-900 text-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-amber-400">
+                    PODERES PARA APRENDEDORES <span class="text-white text-lg font-normal">(P.P.A.)</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-300 font-medium">
+                    «Gimnasia Para tu Cerebro» • Gregorio Gómez Pérez
+                </p>
+            </div>
+
+            <!-- RELOJ DIGITAL EN VIVO -->
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl px-5 py-2 text-center shadow-inner">
+                <div id="live-clock" class="text-xl sm:text-2xl font-mono font-bold text-amber-400 tracking-wider">00:00:00</div>
+                <div class="text-[10px] text-slate-400 uppercase tracking-widest">«Este mundo es un aula, por eso todos somos aprendedores»</div>
+            </div>
+        </div>
+
+        <!-- BARRA DE BOTONES SUPERIORES -->
+        <nav class="bg-slate-950 border-t border-slate-800 py-2.5 px-4 shadow-md">
+            <div class="max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-2">
+                <button onclick="switchTab('taller')" id="btn-taller" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition shadow-sm">
+                    <i class="fa-solid fa-screwdriver-wrench mr-1.5"></i> Taller
+                </button>
+                <a href="ELCORREODEBURGOS.pdf" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white hover:bg-blue-500 transition shadow-sm inline-flex items-center">
+                    <i class="fa-solid fa-newspaper mr-1.5"></i> Noticias
+                </a>
+                <button onclick="switchTab('cartel')" id="btn-cartel" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    <i class="fa-solid fa-bullhorn mr-1.5"></i> Cartel
+                </button>
+                <button onclick="switchTab('gimnasio')" id="btn-gimnasio" class="main-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    <i class="fa-solid fa-dumbbell mr-1.5"></i> Gimnasio
+                </button>
+            </div>
+        </nav>
+
+        <!-- BARRA DE EFECTOS PRINCIPALES (0 al 7) -->
+        <div class="bg-slate-900 border-t border-slate-800 py-3 px-4">
+            <div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-1.5 sm:gap-2">
+                <button onclick="switchTab('inicio')" id="btn-inicio" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition shadow-xs">
+                    0. Portada y Tetralogía
+                </button>
+                <button onclick="switchTab('concierto')" id="btn-concierto" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    1. Concierto
+                </button>
+                <button onclick="switchTab('cine')" id="btn-cine" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    2. Cine
+                </button>
+                <button onclick="switchTab('periodista')" id="btn-periodista" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    3. Periodista
+                </button>
+                <button onclick="switchTab('tiempo')" id="btn-tiempo" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    4. Tiempo
+                </button>
+                <button onclick="switchTab('desayuno')" id="btn-desayuno" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    5. Desayuno
+                </button>
+                <button onclick="switchTab('tonto')" id="btn-tonto" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    6. «Tonto»
+                </button>
+                <button onclick="switchTab('conclusion')" id="btn-conclusion" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                    7. Reflexión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 0: PORTADA Y TETRALOGÍA (ACTIVA AL INICIO)        -->
+        <!-- ========================================================= -->
+        <div id="inicio" class="tab-content active space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-8">
+                <!-- Exordio Aristotélico -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-2xl p-5 space-y-2">
+                    <span class="text-xs font-black uppercase tracking-widest text-amber-800">Pregunta Abierta para Empezar • Exordio Aristotélico</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-slate-900">
+                        «¿Por qué hace 40 años éramos más de 40 alumnos por aula y hoy, bajando la ratio a menos de 30, nos cuesta más avanzar?»
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        Esa paradoja es el origen de esta Tetralogía: dar <strong>20 «poderes» prácticos</strong> a alumnos, profesores, centros educativos y sociedad para pasar de ser meramente <em>eficaces</em> a ser verdaderamente <strong>eficientes</strong> (aprender más en menos tiempo).
+                    </p>
+                </div>
+
+                <!-- Portada + Séneca + Pericles -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-4 flex flex-col items-center">
+                        <div class="bg-white p-3 rounded-2xl border-2 border-amber-400 shadow-xl w-full max-w-sm">
+                            <img src="ppa.jpg" alt="Portada del libro Poderes para aprender, de Gregorio Gómez Pérez" class="w-full h-auto rounded-xl object-contain">
+                        </div>
+                        <span class="mt-2 text-xs font-bold text-slate-600">Tetralogía I • Editorial Círculo Rojo</span>
+                    </div>
+
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="bg-slate-900 text-white rounded-2xl p-6 space-y-2">
+                            <span class="text-xs font-black uppercase tracking-widest text-amber-400">Sabiduría Estoica • Lucio Anneo Séneca</span>
+                            <p class="text-base sm:text-lg font-bold italic">«La suerte es lo que ocurre cuando la preparación coincide con la oportunidad.»</p>
+                            <p class="text-xs sm:text-sm text-slate-300">El éxito en el aula y en cualquier oficio no es azar: consiste en entrenar tu cerebro antes de que llegue la oportunidad.</p>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 space-y-2">
+                            <span class="text-xs font-black uppercase tracking-widest text-blue-800">El Poder de Comunicar • Pericles</span>
+                            <p class="text-base sm:text-lg font-bold italic text-slate-900">«Quien sabe pensar, pero no sabe expresar lo que piensa, está al mismo nivel que quien no sabe pensar.»</p>
+                            <p class="text-xs sm:text-sm text-slate-700">En <strong>Poderes Para Aprendedores</strong> fomentamos que el aprendedor exponga, pregunte y comparta lo aprendido.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
+                            <h3 class="text-sm font-black text-emerald-950 uppercase">Sobre el Autor</h3>
+                            <p class="text-xs sm:text-sm text-slate-700 mt-1">
+                                <strong>Gregorio Gómez Pérez</strong> — Ingeniero Técnico Industrial y funcionario de carrera del Cuerpo de Profesores de Educación Secundaria, especialidad Tecnología.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Los 4 Libros de la Tetralogía -->
+                <div class="space-y-4 pt-2 border-t border-slate-200">
+                    <h3 class="text-xl sm:text-2xl font-black text-slate-900">La Tetralogía P.P.A.: 4 Libros y 20 Poderes Transformadores</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-amber-50 border-2 border-amber-400 rounded-2xl p-4 space-y-2">
+                            <span class="bg-amber-600 text-white text-[11px] font-black px-2.5 py-0.5 rounded">1.º LIBRO • ACTUAL</span>
+                            <h4 class="font-black text-slate-900 text-sm">Para Aprendedores (6)</h4>
+                            <p class="font-mono text-xs font-bold text-amber-800">CO.CI.PE.TI.DE.TO.</p>
+                            <ul class="text-xs text-slate-700 space-y-1">
+                                <li>• 1. Concierto • 2. Cine</li>
+                                <li>• 3. Periodista • 4. Tiempo</li>
+                                <li>• 5. Desayuno • 6. «Tonto»</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 space-y-2">
+                            <span class="bg-blue-700 text-white text-[11px] font-black px-2.5 py-0.5 rounded">2.º LIBRO • DOCENTES</span>
+                            <h4 class="font-black text-slate-900 text-sm">Para Profesorado (4)</h4>
+                            <p class="font-mono text-xs font-bold text-blue-800">VE.O.O.COCO</p>
+                            <ul class="text-xs text-slate-700 space-y-1">
+                                <li>• Vehemencia • Ovillo</li>
+                                <li>• Oratoria • Continente-Contenido</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 space-y-2">
+                            <span class="bg-purple-700 text-white text-[11px] font-black px-2.5 py-0.5 rounded">3.º LIBRO • CENTROS</span>
+                            <h4 class="font-black text-slate-900 text-sm">Para Institutos (5)</h4>
+                            <p class="font-mono text-xs font-bold text-purple-800">GRA.PE.E.SA.HABAS</p>
+                            <ul class="text-xs text-slate-700 space-y-1">
+                                <li>• Gracias • Premio • Secundaria</li>
+                                <li>• Equipo • H.A.B.A.S.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2">
+                            <span class="bg-emerald-700 text-white text-[11px] font-black px-2.5 py-0.5 rounded">4.º LIBRO • SOCIEDAD</span>
+                            <h4 class="font-black text-slate-900 text-sm">Para la Sociedad (5)</h4>
+                            <p class="font-mono text-xs font-bold text-emerald-800">SO.PA.EM.JU.DO</p>
+                            <ul class="text-xs text-slate-700 space-y-1">
+                                <li>• Sociedad • Pasado • Empresa</li>
+                                <li>• Juventud Acumulada • Donuts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA TALLER: ENTRE BASTIDORES Y MÉTODO DE PROYECTOS    -->
+        <!-- ========================================================= -->
+        <div id="taller" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-8">
+                <div class="border-b pb-4">
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Taller Práctico • Entre Bastidores</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">Taller: ¿Cómo se fabricó este libro? Método de Proyectos</h2>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1">Aplicando la ingeniería y la Tecnología del aula para construir una obra paso a paso.</p>
+                </div>
+
+                <!-- Esquema Visual del Vehículo de 6 Piezas -->
+                <div class="bg-slate-900 text-white rounded-3xl p-6 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <h3 class="text-lg font-black text-amber-400">El Vehículo del Aprendedor: 6 Piezas Sincronizadas</h3>
+                        <span class="bg-amber-500 text-slate-950 font-mono font-black text-xs px-3 py-1 rounded-lg">CO.CI.PE.TI.DE.TO.</span>
+                    </div>
+                    <svg viewBox="0 0 700 210" class="w-full max-w-3xl mx-auto h-auto">
+                        <!-- Carretera -->
+                        <line x1="20" y1="175" x2="680" y2="175" stroke="#64748b" stroke-width="4" stroke-dasharray="14 8"/>
+                        <!-- Chasis -->
+                        <rect x="130" y="95" width="440" height="45" rx="14" fill="#f59e0b"/>
+                        <path d="M 210 95 L 260 45 L 440 45 L 495 95 Z" fill="#fbbf24"/>
+                        <!-- Ventanas -->
+                        <polygon points="268,53 345,53 345,90 228,90" fill="#0f172a"/>
+                        <polygon points="355,53 432,53 475,90 355,90" fill="#0f172a"/>
+                        <!-- Ruedas -->
+                        <circle cx="220" cy="145" r="28" fill="#1e293b" stroke="#e2e8f0" stroke-width="5"/>
+                        <circle cx="220" cy="145" r="10" fill="#f59e0b"/>
+                        <circle cx="480" cy="145" r="28" fill="#1e293b" stroke="#e2e8f0" stroke-width="5"/>
+                        <circle cx="480" cy="145" r="10" fill="#f59e0b"/>
+                        <!-- Etiquetas -->
+                        <text x="115" y="75" fill="#fde68a" font-size="12" font-weight="bold" text-anchor="end">1. Concierto (GPS)</text>
+                        <text x="350" y="30" fill="#93c5fd" font-size="12" font-weight="bold" text-anchor="middle">2. Cine (Parabrisas Limpio)</text>
+                        <text x="585" y="75" fill="#6ee7b7" font-size="12" font-weight="bold" text-anchor="start">3. Periodista (Faros)</text>
+                        <text x="220" y="198" fill="#fcd34d" font-size="12" font-weight="bold" text-anchor="middle">4. Tiempo (Ruedas)</text>
+                        <text x="350" y="123" fill="#0f172a" font-size="13" font-weight="900" text-anchor="middle">5. DESAYUNO (MOTOR)</text>
+                        <text x="480" y="198" fill="#fca5a5" font-size="12" font-weight="bold" text-anchor="middle">6. «Tonto» (Espejo Retrovisor)</text>
+                    </svg>
+                </div>
+
+                <!-- Nemotécnico de 10 pasos del Método de Proyectos -->
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <h3 class="text-xl font-black text-slate-900">Los 10 Pasos del Método de Proyectos Tecnológico</h3>
+                        <span class="bg-amber-600 text-white font-mono font-black text-sm px-4 py-1.5 rounded-xl">DE.BU.SO.EL.DI.PE.CO.CO.PRE.EL</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-amber-700">1. DE — Detectar:</strong> Identificar el problema o necesidad real en el aula.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-amber-700">2. BU — Buscar:</strong> Investigar información, referencias y experiencias previas.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-amber-700">3. SO — Soluciones:</strong> Generar lluvia de ideas y alternativas posibles.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-amber-700">4. EL — Elegir:</strong> Seleccionar la solución más viable, clara y eficiente.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-amber-700">5. DI — Diseñar:</strong> Estructurar capítulos, dibujos, esquemas y portada.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-emerald-700">6. PE — Pedir:</strong> Preparar materiales, recursos y herramientas necesarias.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-emerald-700">7. CO — Construir:</strong> Redactar, ilustrar y dar forma real al proyecto.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-emerald-700">8. CO — Comprobar:</strong> Revisar, corregir erratas y validar con alumnos y lectores.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-emerald-700">9. PRE — Presentar:</strong> Publicar y defender el proyecto en bibliotecas y aulas.</div>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl"><strong class="text-emerald-700">10. EL — Evaluar:</strong> Medir el impacto y preparar la siguiente entrega de la Tetralogía.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA CARTEL (Con Portada Principal y Mosaico Inferior) -->
+        <!-- ========================================================= -->
+        <div id="cartel" class="tab-content space-y-8">
+            <div class="bg-amber-50 border-4 border-amber-500 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6 text-slate-900">
+                <!-- Cabecera -->
+                <div class="text-center space-y-1.5 border-b-2 border-amber-300 pb-4">
+                    <span class="inline-block bg-red-700 text-white font-black text-xs sm:text-sm px-4 py-1 rounded-full uppercase tracking-widest">
+                        APRENDER NECESITA ESFUERZO
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+                        PODERES PARA APRENDER
+                    </h2>
+                    <p class="text-lg sm:text-2xl font-extrabold text-amber-600">
+                        «Gimnasia Para tu Cerebro»
+                    </p>
+                    <p class="text-xs sm:text-sm text-slate-700 font-bold">
+                        Gregorio Gómez Pérez • <span class="text-slate-600 font-semibold">Ingeniero Técnico Industrial | Funcionario de carrera del Cuerpo de Profesores de Educación Secundaria, especialidad Tecnología</span>
+                    </p>
+                </div>
+
+                <!-- BLOQUE CENTRAL PROTAGONISTA: PORTADA DEL LIBRO (ppa.jpg) + MENSAJE CLAVE -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <!-- Portada Principal del Libro (ppa.jpg) -->
+                    <div class="lg:col-span-5 flex flex-col items-center">
+                        <div class="bg-white p-3 rounded-2xl border-2 border-amber-400 shadow-xl max-w-xs w-full">
+                            <img src="ppa.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x560/FFFBEB/0F172A?text=PODERES+PARA+APRENDER%0AP.P.A.%0AGimnasia+Para+tu+Cerebro';" alt="Portada del libro Poderes Para Aprender - Gregorio Gómez Pérez" class="w-full h-auto rounded-xl object-contain">
+                        </div>
+                        <span class="mt-2 bg-amber-600 text-white font-mono font-black text-xs px-3 py-1 rounded-lg">
+                            TETRALOGÍA I • CO.CI.PE.TI.DE.TO.
+                        </span>
+                    </div>
+
+                    <!-- Información Esencial Junto a la Portada -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <!-- Sede Biblioteca -->
+                        <div class="bg-purple-50 border-2 border-purple-300 rounded-2xl p-4 shadow-xs">
+                            <span class="text-[11px] font-black uppercase tracking-widest text-purple-800">Presentación y Taller Práctico</span>
+                            <h3 class="text-xl sm:text-2xl font-black text-slate-900">
+                                Biblioteca María Teresa de León, Burgos
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-800 mt-1">
+                                <strong class="text-emerald-700">Objetivo de los 20 Poderes:</strong> Hacer más eficiente el aprendizaje en <strong>todos los sectores</strong> (aprender más en menos tiempo y mejorar la eficiencia profesional, abriendo la puerta a <strong>semanas laborales y educativas de 4 días</strong>).
+                            </p>
+                        </div>
+
+                        <!-- Ecuación de la IA + Gimnasio Mental -->
+                        <div class="bg-blue-50 border-2 border-blue-400 rounded-2xl p-4 text-center space-y-2.5 shadow-xs">
+                            <p class="text-sm sm:text-base font-black text-slate-900">
+                                Aprender es gimnasia <span class="text-blue-600">→</span> <span class="text-emerald-700">Genera capacidades</span> <span class="text-blue-600">→</span> <span class="text-blue-800">La IA desarrolla capacidades</span>
+                            </p>
+                            <div class="flex flex-wrap justify-center gap-2">
+                                <span class="bg-white border border-red-300 text-red-700 font-black text-xs px-3 py-1 rounded-lg">
+                                    Capacidades = 0 ⇒ La IA desarrolla = 0
+                                </span>
+                                <span class="bg-slate-900 text-amber-400 font-black text-xs px-3 py-1 rounded-lg">
+                                    A más formación, más provecho a la IA
+                                </span>
+                            </div>
+                            <div class="bg-white border border-emerald-400 rounded-xl p-2.5">
+                                <p class="text-xs font-bold text-emerald-800">Un centro educativo es como un gimnasio para ejercitar la mente:</p>
+                                <p class="text-sm sm:text-base font-black text-red-700">¡Nadie va a un gimnasio a que le hagan las dominadas!</p>
+                            </div>
+                        </div>
+
+                        <!-- Taller Entre Bastidores -->
+                        <div class="bg-emerald-50 border border-emerald-400 rounded-2xl p-3.5 flex flex-col sm:flex-row items-center justify-between gap-2">
+                            <div class="text-center sm:text-left">
+                                <span class="text-[11px] font-black uppercase text-emerald-800">TALLER • ENTRE BASTIDORES</span>
+                                <p class="text-xs sm:text-sm font-black text-slate-900">¿Quieres aprender cómo se hizo este libro? Método de Proyectos:</p>
+                            </div>
+                            <span class="bg-amber-600 text-white font-mono font-black text-xs px-3 py-1.5 rounded-lg shrink-0">
+                                DE.BU.SO.EL.DI.PE.CO.CO.PRE.EL
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE INFERIOR: MOSAICO DE LOS 20 PODERES DE LA TETRALOGÍA (PORTADA.jpg) -->
+                <div class="bg-white border-2 border-slate-300 rounded-2xl p-4 sm:p-6 shadow-md space-y-3">
+                    <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-200 pb-2">
+                        <h4 class="text-sm sm:text-base font-black text-slate-900 uppercase">
+                            Mapa Visual de los 20 Poderes de la Tetralogía P.P.A.
+                        </h4>
+                        <div class="flex flex-wrap gap-1.5 text-[11px] font-bold">
+                            <span class="bg-slate-900 text-white px-2 py-0.5 rounded">I: Alumnos (6)</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded">II: Docentes (4)</span>
+                            <span class="bg-red-100 text-red-800 px-2 py-0.5 rounded">III: Centros (5)</span>
+                            <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">IV: Sociedad (5)</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="PORTADA.jpg" onerror="this.onerror=null;this.src='https://placehold.co/700x260/F8FAFC/0F172A?text=MAPA+DE+LOS+20+PODERES+P.P.A.%0AI:+CO.CI.PE.TI.DE.TO.+|+II:+VE.O.O.COCO+|+III:+GRA.PE.E.SA.HABAS+|+IV:+SO.PA.EM.JU.DO';" alt="Mosaico de los 20 Poderes de la Tetralogía Poderes Para Aprender" class="w-full max-w-2xl h-auto rounded-xl border border-slate-200 shadow-xs">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARTELES PDF AÑADIDOS: se conserva íntegro el contenido anterior de esta pestaña -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl space-y-8">
+                <div class="text-center space-y-2 border-b border-slate-200 pb-5">
+                    <span class="inline-block bg-amber-500 text-slate-950 font-black text-xs px-4 py-1 rounded-full uppercase tracking-widest">Carteles descargables</span>
+                    <h3 class="text-2xl sm:text-3xl font-black text-slate-900">Los dos carteles de Poderes para Aprender</h3>
+                    <p class="text-sm text-slate-600">Se muestran completos, uno debajo del otro. También puedes descargarlos en PDF.</p>
+                </div>
+
+                <section class="space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <h4 class="text-lg font-black text-slate-900">1. Presentación y taller práctico</h4>
+                        <a href="Cartel_1_Presentacion_Poderes_para_aprender.pdf" download class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-bold text-white hover:bg-blue-600 transition">
+                            <i class="fa-solid fa-download"></i> Descargar cartel 1 (PDF)
+                        </a>
+                    </div>
+                    <div class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-md">
+                        <iframe src="Cartel_1_Presentacion_Poderes_para_aprender.pdf#toolbar=1&navpanes=0" title="Cartel 1: Presentación y taller práctico" class="w-full" style="height: min(88vh, 1100px); min-height: 520px;" loading="lazy"></iframe>
+                    </div>
+                    <p class="text-xs text-slate-500">Si tu navegador no muestra el PDF, utiliza el botón de descarga.</p>
+                </section>
+
+                <div class="border-t border-slate-200"></div>
+
+                <section class="space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <h4 class="text-lg font-black text-slate-900">2. Próximas tres tetralogías</h4>
+                        <a href="Cartel_2_Proximas_tetralogias_Poderes_para_aprender.pdf" download class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-bold text-white hover:bg-blue-600 transition">
+                            <i class="fa-solid fa-download"></i> Descargar cartel 2 (PDF)
+                        </a>
+                    </div>
+                    <div class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-md">
+                        <iframe src="Cartel_2_Proximas_tetralogias_Poderes_para_aprender.pdf#toolbar=1&navpanes=0" title="Cartel 2: Próximas tres tetralogías" class="w-full" style="height: min(88vh, 1100px); min-height: 520px;" loading="lazy"></iframe>
+                    </div>
+                    <p class="text-xs text-slate-500">Puedes descargar este segundo cartel para guardarlo o imprimirlo.</p>
+                </section>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 1: EFECTO CONCIERTO (COMPLETO)                     -->
+        <!-- ========================================================= -->
+        <div id="concierto" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-purple-100 text-purple-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Efecto #1 • [CO] • Efecto Previo</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">1. Efecto Concierto: Preparándose para un aprendizaje óptimo</h2>
+                </div>
+                <blockquote class="bg-purple-50 border-l-4 border-purple-600 p-5 rounded-r-2xl text-slate-800 italic text-sm sm:text-base">
+                    «Al igual que un concierto musical se disfruta mucho más cuando se conoce la letra de las canciones y se puede cantar junto a los artistas, el estudiante interesado aprovecha al máximo las clases cuando está preparado con conocimientos previos.»
+                </blockquote>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-1">
+                        <h4 class="font-bold text-purple-900 text-sm">Zona de Desarrollo Próximo (Vygotsky)</h4>
+                        <p class="text-xs text-slate-600">Los nuevos conocimientos necesitan cimentarse sólidamente sobre lo ya sabido para facilitar el crecimiento académico sin frustración.</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-1">
+                        <h4 class="font-bold text-purple-900 text-sm">Calentamiento Mental</h4>
+                        <p class="text-xs text-slate-600">Al igual que un deportista calienta antes de competir, leer e informarse antes de clase permite seguir el ritmo con facilidad.</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-1">
+                        <h4 class="font-bold text-purple-900 text-sm">Ahorro de Horas en Casa</h4>
+                        <p class="text-xs text-slate-600">Tener una preparación previa elimina la necesidad de pasar largas horas descifrando lo que no se entendió en el aula.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-purple-50/70 border border-purple-200 rounded-2xl p-6 space-y-3">
+                        <h3 class="text-lg font-black text-purple-950">10 Ejemplos para Alumnos y Estudiantes</h3>
+                        <ol class="list-decimal list-inside space-y-1.5 text-xs sm:text-sm text-slate-700">
+                            <li>Estudiar y repasar antes permite participar activamente en discusiones.</li>
+                            <li>Investigar previamente facilita hacer preguntas relevantes y profundas.</li>
+                            <li>Seguir el ritmo de la clase y asimilar conceptos con mayor eficiencia.</li>
+                            <li>Relacionar nuevos conceptos con saberes previos mejora la retención.</li>
+                            <li>Aumenta la confianza y la participación en trabajos en grupo.</li>
+                            <li>Identificar puntos débiles antes de clase para resolverlos en el aula.</li>
+                            <li>Permite al docente plantear actividades más avanzadas y desafiantes.</li>
+                            <li>Mejor preparación y resultados en evaluaciones y exámenes.</li>
+                            <li>Mayor seguridad para exponer proyectos y presentaciones.</li>
+                            <li>Fomenta un ambiente activo donde el alumno es responsable de su progreso.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-slate-900 text-slate-200 rounded-2xl p-6 space-y-3">
+                        <h3 class="text-lg font-black text-amber-400">10 Ejemplos para Trabajadores y Profesionales</h3>
+                        <ol class="list-decimal list-inside space-y-1.5 text-xs sm:text-sm">
+                            <li>Investigar previamente una tarea aporta ideas más creativas en reuniones.</li>
+                            <li>Preparar presentaciones a clientes proyecta confianza y profesionalidad.</li>
+                            <li>Anticiparse a obstáculos y desafíos en un proyecto técnico.</li>
+                            <li>Preparación previa en negociaciones comerciales para lograr acuerdos favorables.</li>
+                            <li>Destacar habilidades con eficacia en entrevistas de trabajo.</li>
+                            <li>Adaptación rápida y mayor rendimiento al adoptar nuevas tecnologías.</li>
+                            <li>Participación productiva en conferencias para facilitar decisiones.</li>
+                            <li>Analizar mercado y competencia para diseñar estrategias sólidas.</li>
+                            <li>Aumentar conocimientos para acceder a oportunidades de ascenso.</li>
+                            <li>Enfoque y productividad desde el inicio de la jornada laboral.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 2: EFECTO CINE (COMPLETO)                          -->
+        <!-- ========================================================= -->
+        <div id="cine" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-blue-100 text-blue-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Efecto #2 • [CI] • Comunicación No Verbal</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">2. Efecto Cine: Silencio respetuoso y miradas de comunicación</h2>
+                </div>
+                <blockquote class="bg-blue-50 border-l-4 border-blue-600 p-5 rounded-r-2xl text-slate-800 italic text-sm sm:text-base">
+                    «En una sala de cine, cuando alguien habla, los propios espectadores utilizan miradas sutiles para indicar que deben guardar silencio. Llevemos esa misma cultura de respeto al aula.»
+                </blockquote>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 space-y-2">
+                    <h4 class="font-bold text-amber-900 text-sm">Origen e Inspiración: Javier Sanz (IES La Bureba de Briviesca)</h4>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        «Quiero recordar a Javier Sanz, alumno del IES La Bureba de Briviesca. Un día me habló de cómo, en otro centro, los propios alumnos, con sus miradas, lograban el silencio y la atención en clase. Aquella reflexión me impactó profundamente. Fue entonces cuando surgió en mí la idea del Efecto Cine.»
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-1.5">
+                        <span class="text-xs font-black text-blue-700">1. Fomento del diálogo</span>
+                        <p class="text-xs text-slate-600">Los estudiantes aprenden a escucharse y a turnarse para hablar, construyendo un diálogo enriquecedor.</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-1.5">
+                        <span class="text-xs font-black text-blue-700">2. Respeto por el profesor</span>
+                        <p class="text-xs text-slate-600">Pedir silencio con la mirada evita interrupciones constantes cuando el docente está explicando.</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-1.5">
+                        <span class="text-xs font-black text-blue-700">3. Habilidades sociales</span>
+                        <p class="text-xs text-slate-600">Desarrolla la comunicación no verbal, la empatía y la comprensión de las necesidades del grupo.</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-1.5">
+                        <span class="text-xs font-black text-blue-700">4. Participación equitativa</span>
+                        <p class="text-xs text-slate-600">Al respetar los turnos de palabra, todos tienen oportunidad de expresar sus ideas y preguntas.</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-1.5">
+                        <span class="text-xs font-black text-blue-700">5. Cultura colaborativa</span>
+                        <p class="text-xs text-slate-600">Crea un clima armonioso donde los alumnos se concentran mejor en los proyectos de Tecnología y en cualquier materia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 3: EFECTO PERIODISTA (COMPLETO)                    -->
+        <!-- ========================================================= -->
+        <div id="periodista" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Efecto #3 • [PE] • Actitud Proactiva</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">3. Efecto Periodista: Rueda de prensa en el aula</h2>
+                </div>
+                <blockquote class="bg-emerald-50 border-l-4 border-emerald-600 p-5 rounded-r-2xl text-slate-800 italic text-sm sm:text-base">
+                    «Como un periodista en una rueda de prensa, el alumno no puede ser un espectador pasivo: acude documentado, escucha con alerta máxima, toma notas precisas y formula preguntas clave.»
+                </blockquote>
+
+                <h3 class="text-xl font-black text-slate-900">10 Ejemplos de cómo el Efecto Periodístico mejora el rendimiento</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>1. Estudio previo:</strong> Investigar conceptos clave antes de la sesión para comprender mejor lo nuevo.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>2. Preguntas pertinentes:</strong> Formular dudas relevantes que clarifican y enriquecen a todo el grupo.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>3. Participación:</strong> Implicarse activamente en debates y actividades refuerza la retención.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>4. Toma de notas efectiva:</strong> Apuntes organizados y precisos que facilitan el repaso posterior.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>5. Conexión de ideas:</strong> Relacionar lo nuevo con lo ya aprendido fortalece la comprensión global.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>6. Investigación adicional:</strong> Ampliar por curiosidad propia los temas tratados en clase.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>7. Análisis crítico:</strong> Evaluar la información presentada y formar conclusiones propias.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>8. Presentación de informes:</strong> Organizar y comunicar con claridad los conocimientos adquiridos.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>9. Interacción con el profesor:</strong> Fomentar una relación de aprendizaje estrecha mediante el diálogo.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>10. Aplicación en la vida diaria:</strong> Desarrollar hábitos de investigación útiles en cualquier profesión.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 4: EFECTO TIEMPO (Bi.S.A. y S.O.L. COMPLETO)       -->
+        <!-- ========================================================= -->
+        <div id="tiempo" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-amber-100 text-amber-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Efecto #4 • [TI] • Gestión del Tiempo</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">4. Efecto Tiempo: El reloj en el aula, Bi.S.A. y S.O.L.</h2>
+                </div>
+                <blockquote class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl text-slate-800 italic text-sm sm:text-base">
+                    «Colocar un reloj en cada aula como recordatorio visual del valor del tiempo. Al igual que los padres realizan sus labores en su lugar de trabajo sin llevarse el trabajo a casa como norma general, aprovechar cada minuto en clase libera tus tardes.»
+                </blockquote>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Bi.S.A. -->
+                    <div class="bg-amber-50/70 border-2 border-amber-300 rounded-2xl p-6 space-y-4">
+                        <h3 class="text-xl font-black text-amber-950">Bi.S.A. — Cómo estar en clase desde el primer día</h3>
+                        <ul class="space-y-3 text-xs sm:text-sm text-slate-700">
+                            <li>
+                                <strong class="text-amber-800 text-base">Bi — Bien Sentados:</strong> Espalda ergonómicamente apoyada en el respaldo, cuerpo frente al pupitre, material sobre la mesa y bolígrafo en la mano. Mejora la concentración, reduce lesiones de espalda y cuello, fomenta la participación, incrementa la productividad y es un valor social de respeto.
+                            </li>
+                            <li>
+                                <strong class="text-amber-800 text-base">S — Silencio:</strong> Básico para escuchar al profesor y no molestar a los compañeros. Favorece la concentración, facilita la escucha activa, ahorra tiempo de explicación e incrementa la calidad educativa.
+                            </li>
+                            <li>
+                                <strong class="text-amber-800 text-base">A — Atención:</strong> Estar bien sentado (Bi) y en silencio (S) son las premisas necesarias para activar la atención real y aprovechar un recurso limitado como es el tiempo.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- S.O.L. -->
+                    <div class="bg-blue-50/70 border-2 border-blue-300 rounded-2xl p-6 space-y-4">
+                        <h3 class="text-xl font-black text-blue-950">S.O.L. — Los 3 Pilares de todo Oficio y Taller</h3>
+                        <ul class="space-y-3 text-xs sm:text-sm text-slate-700">
+                            <li>
+                                <strong class="text-blue-800 text-base">S — Seguridad:</strong> Prioridad absoluta en el taller, en el laboratorio y en cualquier profesión. <em>«La seguridad es básica: tus manos son para toda la vida.»</em>
+                            </li>
+                            <li>
+                                <strong class="text-blue-800 text-base">O — Orden:</strong> Ordenar bien los apuntes, las herramientas y las ideas agiliza el trabajo y multiplica la claridad mental.
+                            </li>
+                            <li>
+                                <strong class="text-blue-800 text-base">L — Limpieza:</strong> Trabajar en espacios limpios, cuidados y ventilados es condición imprescindible para que un centro y un país avancen.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 5: EFECTO DESAYUNO (12 VENTAJAS COMPLETO)          -->
+        <!-- ========================================================= -->
+        <div id="desayuno" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-red-100 text-red-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Efecto #5 • [DE] • Combustible Cerebral</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">5. Efecto Desayuno: La gasolina del motor cerebral</h2>
+                </div>
+                <blockquote class="bg-red-50 border-l-4 border-red-600 p-5 rounded-r-2xl text-slate-800 italic text-sm sm:text-base">
+                    «Como dijo el poeta romano Juvenal: <em>“Mens sana in corpore sano”</em>. Imagina la mente de un estudiante como un motor que necesita ser encendido por la mañana con gasolina de calidad para no tambalearse ni calarse en mitad de la clase.»
+                </blockquote>
+
+                <h3 class="text-xl font-black text-slate-900">Las 12 Ventajas de un Buen Desayuno en el Rendimiento Escolar</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs sm:text-sm">
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>1. Aumento de energía:</strong> Proporciona la vitalidad necesaria para afrontar toda la jornada escolar.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>2. Mejora de la concentración:</strong> Estimula la atención y facilita la absorción de conocimientos.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>3. Mayor rendimiento cognitivo:</strong> Favorece la memoria y la capacidad de resolver problemas.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>4. Regulación del estado de ánimo:</strong> Mantiene estables los niveles de glucosa para un equilibrio emocional.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>5. Reducción de la irritabilidad:</strong> Previene cambios bruscos de humor asociados a la falta de energía.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>6. Apoyo al crecimiento:</strong> Aporta nutrientes esenciales para el desarrollo físico y mental.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>7. Mejora de la asistencia escolar:</strong> Disminuye ausencias por problemas vinculados a la mala alimentación.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>8. Fomento de hábitos saludables:</strong> Consolida rutinas equilibradas desde la infancia y adolescencia.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>9. Reducción de la fatiga:</strong> Evita el cansancio matinal, manteniendo al alumno activo y atento.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>10. Mayor participación en clase:</strong> Impulsa la disposición para implicarse en las actividades.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>11. Fortalecimiento inmunitario:</strong> Protege frente a enfermedades comunes dando continuidad académica.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>12. Estabilidad emocional:</strong> Contribuye a la resiliencia para afrontar los retos del día a día.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 6: EFECTO TONTO (10 VENTAJAS COMPLETO)             -->
+        <!-- ========================================================= -->
+        <div id="tonto" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-stone-200 text-stone-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Efecto #6 • [TO] • Espejo de Responsabilidad</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">6. Efecto «Tonto»: Un espejo para despertar la conciencia</h2>
+                </div>
+                <blockquote class="bg-stone-100 border-l-4 border-stone-700 p-5 rounded-r-2xl text-slate-800 italic text-sm sm:text-base">
+                    «¿Sabéis cuál es una de las definiciones de “tonto”? Pasar seis horas de la mañana en clase sin aprovecharlas para luego tener que estudiar el doble por la tarde.»
+                </blockquote>
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    No es una etiqueta hiriente, sino una piedra lanzada al estanque tranquilo de la mente: un <strong>espejo</strong> para que cada estudiante evalúe si está tomando el timón de su educación y aprovechando las 6 horas de clase.
+                </p>
+
+                <h3 class="text-xl font-black text-slate-900">10 Ventajas Pedagógicas de esta Reflexión en el Aula</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>1. Capta la atención:</strong> Una pregunta intrigante logra el enfoque inmediato de toda la clase.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>2. Genera interés:</strong> Despierta la curiosidad por descubrir la relación con el aprovechamiento del tiempo.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>3. Incentiva la participación:</strong> Abre un diálogo bidireccional donde los alumnos comparten sus opiniones.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>4. Fomenta la reflexión personal:</strong> Invita a evaluar si realmente están sacando partido a las 6 horas matinales.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>5. Conexión emocional:</strong> Resuena con experiencias previas de haber perdido tiempo y tener que recuperar después.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>6. Rompe la monotonía:</strong> Evita que los estudiantes se desconecten o se aburran en medio de una explicación.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>7. Estímulo a la autorreflexión:</strong> Impulsa el aprendizaje autodirigido y la autogestión del estudio.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>8. Despertar de la conciencia:</strong> Visualiza el coste real de desperdiciar oportunidades en el presente.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>9. Promueve la responsabilidad:</strong> Recuerda que cada alumno es protagonista de su propio desarrollo.</div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl"><strong>10. Cambio de actitud:</strong> Motiva a adoptar hábitos constructivos para maximizar cada hora escolar.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA 7: REFLEXIÓN Y CONCLUSIÓN (COMPLETO)              -->
+        <!-- ========================================================= -->
+        <div id="conclusion" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-indigo-100 text-indigo-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Cierre de la Obra • Síntesis</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">7. Reflexión Final, IA, Juventud Acumulada y Agradecimientos</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 space-y-2">
+                        <h3 class="text-lg font-black text-blue-950">La IA como Aceleradora</h3>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Aprender es gimnasia; la gimnasia genera capacidades; la IA desarrolla capacidades. Si tus capacidades son cero, la IA desarrollará cero. El ser humano debe estar siempre por encima de la tecnología con criterio propio.
+                        </p>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 space-y-2">
+                        <h3 class="text-lg font-black text-emerald-950">Juventud Acumulada</h3>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Las personas mayores poseen décadas de sabiduría vital. Conectar a mayores y jóvenes en los centros educativos —junto con el «quinto día» de devolución social— une generaciones y humaniza la educación.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 space-y-2">
+                        <h3 class="text-lg font-black text-amber-950">Agradecimientos del Autor</h3>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Dedicado a sus padres, <strong>Gregorio Gómez Vesga y Leonor Pérez Arroyo</strong>, a sus alumnos y compañeros del <strong>IES La Bureba</strong>, <strong>IES Félix Rodríguez de la Fuente</strong>, <strong>IES Diego Marín Aguilera</strong>, equipo <strong>Valbalt</strong> y al <strong>Colegio Oficial de Graduados e Ingenieros Técnicos Industriales de Burgos</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 text-white rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h4 class="text-lg font-black text-amber-400">Poderes Para Aprender - P.P.A.</h4>
+                        <p class="text-xs sm:text-sm text-slate-300">«Gimnasia Para tu Cerebro» • Gregorio Gómez Pérez • Editorial Círculo Rojo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ========================================================= -->
+        <!-- PESTAÑA: GIMNASIO MENTAL                                  -->
+        <!-- ========================================================= -->
+        <div id="gimnasio" class="tab-content space-y-8">
+            <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-8 shadow-xl space-y-7">
+                <div class="text-center space-y-3">
+                    <span class="inline-block bg-emerald-100 text-emerald-800 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest">La gran metáfora de P.P.A.</span>
+                    <h2 class="text-3xl sm:text-5xl font-black text-slate-900">EL APRENDIZAJE ES GIMNASIA</h2>
+                    <p class="text-base sm:text-xl font-bold text-emerald-700">Los centros educativos son gimnasios para entrenar la mente.</p>
+                    <p class="max-w-3xl mx-auto text-sm sm:text-base text-slate-600">Entra en este gimnasio mental. Pulsa cada espacio para descubrir cómo una biblioteca, un aula o un libro pueden convertirse en instrumentos para desarrollar nuestras capacidades.</p>
+                </div>
+
+                <div class="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-md">
+                    <img id="gymnasium-image" src="gimnasio-centro-educativo.jpg"
+                         alt="Centro educativo representado como un gimnasio mental"
+                         class="w-full h-auto object-cover" style="max-height: 570px;">
+                </div>
+                <div class="text-center space-y-1">
+                    <h3 id="gymnasium-title" class="text-xl sm:text-2xl font-black text-slate-900">El centro educativo: nuestro gran gimnasio mental</h3>
+                    <p id="gymnasium-description" class="max-w-3xl mx-auto text-sm sm:text-base text-slate-600">Aquí no se entrenan los músculos: se ejercitan la memoria, la atención, la comprensión, la creatividad y el criterio propio.</p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" aria-label="Espacios del gimnasio mental">
+                    <button type="button" onclick="showGymnasium(0)" data-gym="0" aria-pressed="true" class="gym-choice rounded-xl border-2 border-emerald-500 bg-emerald-50 p-3 text-left hover:bg-emerald-100 transition">
+                        <span class="block text-2xl mb-1">🏫</span>
+                        <span class="block text-sm font-black text-slate-900">Centro educativo</span>
+                        <span class="block text-xs text-slate-600 mt-1">El gimnasio completo</span>
+                    </button>
+                    <button type="button" onclick="showGymnasium(1)" data-gym="1" aria-pressed="false" class="gym-choice rounded-xl border-2 border-slate-200 bg-white p-3 text-left hover:bg-amber-50 transition">
+                        <span class="block text-2xl mb-1">📚</span>
+                        <span class="block text-sm font-black text-slate-900">Biblioteca</span>
+                        <span class="block text-xs text-slate-600 mt-1">Gimnasio de lectura</span>
+                    </button>
+                    <button type="button" onclick="showGymnasium(2)" data-gym="2" aria-pressed="false" class="gym-choice rounded-xl border-2 border-slate-200 bg-white p-3 text-left hover:bg-amber-50 transition">
+                        <span class="block text-2xl mb-1">🧠</span>
+                        <span class="block text-sm font-black text-slate-900">Aulas y talleres</span>
+                        <span class="block text-xs text-slate-600 mt-1">Gimnasio de capacidades</span>
+                    </button>
+                    <button type="button" onclick="showGymnasium(3)" data-gym="3" aria-pressed="false" class="gym-choice rounded-xl border-2 border-slate-200 bg-white p-3 text-left hover:bg-amber-50 transition">
+                        <span class="block text-2xl mb-1">🏋️</span>
+                        <span class="block text-sm font-black text-slate-900">Libros-pesas</span>
+                        <span class="block text-xs text-slate-600 mt-1">Entrenar el pensamiento</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="rounded-2xl bg-blue-50 border border-blue-200 p-4">
+                        <h4 class="font-black text-blue-950 mb-1">Gimnasios mentales para todos</h4>
+                        <p class="text-sm text-slate-700">Gimnasio mental de Alumnos · de Docentes · de Centros educativos · de la Sociedad.</p>
+                    </div>
+                    <div class="rounded-2xl bg-amber-50 border border-amber-200 p-4">
+                        <h4 class="font-black text-amber-950 mb-1">Una idea para recordar</h4>
+                        <p class="text-sm text-slate-700">Los libros son nuestras pesas: cada lectura, pregunta, ejercicio y reflexión fortalece capacidades.</p>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-950 text-white p-6 sm:p-8 text-center space-y-3">
+                    <p class="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-300">La pregunta que hago a mis alumnos</p>
+                    <p class="text-2xl sm:text-3xl font-black leading-tight">«¿Irías al gimnasio, te sentarías dos horas y te irías sin hacer nada?»</p>
+                    <p class="text-base sm:text-lg text-slate-200">Entonces, ¿por qué hacerlo en el gimnasio de tu mente?</p>
+                    <p class="text-sm text-amber-300 font-bold">PODERES PARA APRENDER · GIMNASIA PARA TU CEREBRO</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs mt-auto border-t border-slate-800">
+        <p>© 2026 Gregorio Gómez Pérez • Poderes Para Aprendedores (P.P.A.) • Editorial Círculo Rojo</p>
+        <p class="mt-1">Contacto: <a href="mailto:libropoderesparaaprender@gmail.com" class="text-amber-400 hover:underline">libropoderesparaaprender@gmail.com</a></p>
+    </footer>
+
+    <!-- SCRIPT DE PESTAÑAS Y RELOJ -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-emerald-600', 'bg-blue-600', 'bg-amber-500', 'text-white', 'text-slate-950');
+                el.classList.add('bg-slate-800', 'text-slate-200');
+            });
+            document.querySelectorAll('.main-tab-btn').forEach(el => {
+                el.classList.remove('bg-amber-500', 'text-slate-950');
+                el.classList.add('bg-slate-800', 'text-slate-200');
+            });
+
+            const target = document.getElementById(tabId);
+            if(target) target.classList.add('active');
+
+            const btnTaller = document.getElementById('btn-taller');
+            const btnCartel = document.getElementById('btn-cartel');
+
+            if(tabId === 'taller') {
+                btnTaller.classList.remove('bg-slate-800', 'text-slate-200');
+                btnTaller.classList.add('bg-emerald-600', 'text-white');
+            } else if(tabId === 'cartel') {
+                btnCartel.classList.remove('bg-slate-800', 'text-slate-200');
+                btnCartel.classList.add('bg-amber-500', 'text-slate-950');
+            } else {
+                const mainBtn = document.getElementById('btn-' + tabId);
+                if(mainBtn) {
+                    mainBtn.classList.remove('bg-slate-800', 'text-slate-200');
+                    mainBtn.classList.add('bg-amber-500', 'text-slate-950');
+                }
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const gymnasiumScenes = [
+            {
+                image: "gimnasio-centro-educativo.jpg",
+                alt: "Centro educativo como gimnasio mental",
+                title: "El centro educativo: nuestro gran gimnasio mental",
+                description: "Aquí no se entrenan los músculos: se ejercitan la memoria, la atención, la comprensión, la creatividad y el criterio propio."
+            },
+            {
+                image: "gimnasio-biblioteca.jpg",
+                alt: "Biblioteca luminosa con estudiantes leyendo y aprendiendo",
+                title: "La biblioteca: gimnasio de lectura y concentración",
+                description: "Cada libro propone un entrenamiento: comprender, relacionar ideas, hacerse preguntas y construir conocimiento."
+            },
+            {
+                image: "gimnasio-aulas-taller.jpg",
+                alt: "Aula-taller con estudiantes experimentando y colaborando",
+                title: "Las aulas y los talleres: gimnasio de capacidades",
+                description: "Experimentar, dialogar, resolver problemas y trabajar en equipo son ejercicios para desarrollar nuestras capacidades."
+            },
+            {
+                image: "gimnasio-libros-pesas.jpg",
+                alt: "Libros convertidos en pesas de gimnasio",
+                title: "Los libros-pesas: entrenamiento para el cerebro",
+                description: "Igual que las pesas fortalecen el cuerpo, los libros y los retos intelectuales fortalecen la mente cuando los trabajamos activamente."
+            }
+        ];
+
+        function showGymnasium(index) {
+            const scene = gymnasiumScenes[index];
+            if (!scene) return;
+            const image = document.getElementById('gymnasium-image');
+            const title = document.getElementById('gymnasium-title');
+            const description = document.getElementById('gymnasium-description');
+            if (image) {
+                image.src = scene.image;
+                image.alt = scene.alt;
+            }
+            if (title) title.textContent = scene.title;
+            if (description) description.textContent = scene.description;
+
+            document.querySelectorAll('.gym-choice').forEach((button) => {
+                const selected = Number(button.dataset.gym) === index;
+                button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+                button.classList.toggle('border-emerald-500', selected);
+                button.classList.toggle('bg-emerald-50', selected);
+                button.classList.toggle('border-slate-200', !selected);
+                button.classList.toggle('bg-white', !selected);
+            });
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const clockEl = document.getElementById('live-clock');
+            if(clockEl) {
+                clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
